@@ -141,7 +141,7 @@ data_t classifier_weight[13][64] = {
     data_t (*concat_buf)[4][16][1536] = reinterpret_cast<data_t (*)[4][16][1536]>(concat_buf_vec.data());
     aligned_vector concat_out_vec(8 * 16 * 1536);
     data_t (*concat_out)[16][1536] = reinterpret_cast<data_t (*)[16][1536]>(concat_out_vec.data());
-    read_input_data("train06_trimmed.fc32", input);
+    read_input_data("../data/train06_trimmed.fc32", input);
     conv_layer<2, 12, 32, 3072, 32, 3072, 3, 1>(
         input, onnx_Conv_307, onnx_Conv_308, stem_out, 1, 1, 1, 1);
     relu_layer<12, 32, 3072>(stem_out, relu_out);
@@ -211,4 +211,5 @@ data_t classifier_weight[13][64] = {
     gemm_layer_1d<13, 64>(global_out, classifier_weight, classifier_bias, output);
     print_inference_results(output);
     return 0;
+
 }
